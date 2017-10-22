@@ -22,6 +22,11 @@ $(document).ready(function(){
 			alert("麻煩請填寫暱稱喔~")
 		} 
 	},false);
+	$(input_send).hover(function(){
+		$(input_send).addClass('animated jello');
+	},function(){
+		$(input_send).removeClass('animated jello');
+	});
 });
 
 //firebase
@@ -81,7 +86,11 @@ $(document).ready(function(){
    		list.innerHTML = '';
     	var str = '';
       	snapshot.forEach(function(data){
-        	str+='<div data-key="'+data.key+'">'+data.val().name+"："+data.val().message+' <span class="date_time">'+data.val().date_time+'</span>'+'</div>'
+      		if(data.val().name=="系統"){
+      			str+='<div data-key="'+data.key+'"><span class="name_style_system">'+data.val().name+"："+data.val().message+'</span> <span class="date_time">'+data.val().date_time+'</span>'+'</div>'
+      		}else{
+      			str+='<div data-key="'+data.key+'"><span class="name_style">'+data.val().name+"：</span>"+data.val().message+' <span class="date_time">'+data.val().date_time+'</span>'+'</div>'
+      		}    	
     	})
     	list.innerHTML = str; 
     	$(show_message_layout).scrollTop($(list).height());

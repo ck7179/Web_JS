@@ -197,6 +197,7 @@ table {
 	border-radius:17.5px;
 	border:none;
 	outline: none;
+	transition: background 0.5s linear;
 }
 #input_send:hover{
 	background: url(images/send_hover.png);
@@ -215,6 +216,12 @@ table {
 .date_time{
 	color:rgb(180,180,180);
 	font-size: 9pt;
+}
+.name_style{
+	color:#155363;
+}
+.name_style_system{
+	color:#E65E50;
 }
 #green_c_1{
 	position: absolute;
@@ -241,4 +248,22 @@ table {
 	bottom: 0;
 	left: 0;
 	opacity: 0.6;
+}
+/*自訂義Scroll bar 樣式*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #918871; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #918871; 
 }
