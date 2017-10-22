@@ -204,6 +204,7 @@ table {
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
+	transition: background 0.5s linear;
 }
 #list{
 	width: 100%;

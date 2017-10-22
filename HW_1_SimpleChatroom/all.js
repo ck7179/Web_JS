@@ -67,6 +67,16 @@ $(document).ready(function(){
 			input_write.value = "";
 		}		
 	});
+	$(input_write).keypress(function(e){
+  		code = (e.keyCode ? e.keyCode : e.which);
+  		if (code == 13){
+	  		//欄位非空白
+			if(input_write.value != ""){
+				Message.push({name:current_user.name,message:input_write.value,date_time:vMon+"/"+vDay+" "+h+":"+m});
+				input_write.value = "";
+			}
+  		}
+	});
 	Message.on('value',function(snapshot){
    		list.innerHTML = '';
     	var str = '';
