@@ -49,13 +49,7 @@ $(document).ready(function(){
 	var input_write = document.getElementById('input_write');
 	var input_send = document.getElementById('input_send');
 	var current_user = new Object();
-	var d = new Date();
-	var vYear = d.getFullYear();
-	var vMon = d.getMonth() + 1;
-	var vDay = d.getDate();
-	var h = d.getHours(); 
-	var m = d.getMinutes(); 
-	var se = d.getSeconds(); 
+	
 
 	input_join.addEventListener('click', function() { 
 		//欄位非空白
@@ -68,6 +62,13 @@ $(document).ready(function(){
 	input_send.addEventListener('click', function() { 
 		//欄位非空白
 		if(input_write.value != ""){
+			var d = new Date();
+			var vYear = d.getFullYear();
+			var vMon = d.getMonth() + 1;
+			var vDay = d.getDate();
+			var h = d.getHours(); 
+			var m = d.getMinutes(); 
+			var se = d.getSeconds(); 
 			Message.push({name:current_user.name,message:input_write.value,date_time:vMon+"/"+vDay+" "+h+":"+m});
 			input_write.value = "";
 		}		
@@ -77,6 +78,13 @@ $(document).ready(function(){
   		if (code == 13){
 	  		//欄位非空白
 			if(input_write.value != ""){
+				ar d = new Date();
+				var vYear = d.getFullYear();
+				var vMon = d.getMonth() + 1;
+				var vDay = d.getDate();
+				var h = d.getHours(); 
+				var m = d.getMinutes(); 
+				var se = d.getSeconds(); 
 				Message.push({name:current_user.name,message:input_write.value,date_time:vMon+"/"+vDay+" "+h+":"+m});
 				input_write.value = "";
 			}
