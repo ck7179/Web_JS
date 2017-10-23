@@ -78,7 +78,7 @@ $(document).ready(function(){
   		if (code == 13){
 	  		//欄位非空白
 			if(input_write.value != ""){
-				ar d = new Date();
+				var d = new Date();
 				var vYear = d.getFullYear();
 				var vMon = d.getMonth() + 1;
 				var vDay = d.getDate();
