@@ -54,6 +54,13 @@ $(document).ready(function(){
 	input_join.addEventListener('click', function() { 
 		//欄位非空白
 		if(input_name.value != ""){
+			var d = new Date();
+			var vYear = d.getFullYear();
+			var vMon = d.getMonth() + 1;
+			var vDay = d.getDate();
+			var h = d.getHours(); 
+			var m = d.getMinutes(); 
+			var se = d.getSeconds(); 
 			current_user.name = input_name.value;
 			Name.push({name:input_name.value});
 			Message.push({name:"系統",message:"歡迎『"+input_name.value+"』進入聊天室!",date_time:vMon+"/"+vDay+" "+h+":"+m})
