@@ -1,0 +1,26 @@
+<% layout('layout') %>
+<body>
+    <h2><%= name %>的存錢桶</h2>
+    <form action="/saveMoney" method="POST">
+        <input type="text" name="money">
+        <input type="submit" value="存錢">
+    </form>
+    <%
+    var x = 0;
+    for(item in data){
+        x += parseInt(data[item].money);
+    }
+    %>
+    <h3>現在我的存錢桶有<%= x%>元</h3>
+    <ul>
+            <%
+            var x = 0;
+            for(item in data){
+            %>
+            <li>存了<%= data[item].money %>元</li>
+            <%
+            x += data[item].money;
+            }
+            %>
+    </ul>
+</body>
