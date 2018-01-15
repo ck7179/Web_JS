@@ -1,0 +1,106 @@
+<% layout('layout') %>
+<body>
+        <div id="wrapper">
+            <div id="header">
+                <a href="/"><span>3姑6婆</span></a>
+                <%
+                    if(UserID != null){%>
+                    <button id="login" ><%=UserID%></button>
+                    <%}else{%>
+                    <button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+                    <%}%>
+            </div>
+            <div id="chatroom_container">
+                    <div id="chatroom_main">
+                            <div id="write_message_wrapper">
+                            	<div id="write_option">
+                            		<div id="write_option_1" class="write_option_sub">
+                            			<a href="#"><img src="http://140.127.220.149/js_final/image/activity.png" alt="建立活動"></a>
+                            		</div>
+                            		<div id="write_option_2" class="write_option_sub">
+                            			<a href="http://140.127.220.149/js_final/history.php"><img src="http://140.127.220.149/js_final/image/history.png" alt="活動紀錄"></a>
+                            		</div>
+                            		<div id="write_option_3" class="write_option_sub">
+                            			<a href="#"><img src="http://140.127.220.149/js_final/image/calendar.png" alt="行事曆"></a>
+                            		</div>
+                            		<div id="write_option_4" class="write_option_sub">
+                            			<a href="http://140.127.220.149/js_final/edit_image.php"><img src="http://140.127.220.149/js_final/image/picture.png" alt="特效圖"></a>
+                            		</div>
+                            	</div>
+	                            <div id="chatroom_roomName">
+	    							<span>-[<%=chatroomName[0].c_type %>] <%=chatroomName[0].c_name %></span>
+								</div>
+                              <div id="show_message_layout">
+                                <div id="list">
+                                    <% 
+            for(item in message){  //將data資料loop出來
+                if(message[item].u_name=="系統"){  %>
+                <div data-key=""><span class="name_style_system"><%= message[item].u_name %>：<%= message[item].m_content %></span> <span class="date_time"><%= message[item].time %></span></div>
+            <% }else{ %>
+                <div data-key=""><span class="name_style"><%= message[item].u_name %>：<%= message[item].m_content %></span> <span class="date_time"><%= message[item].time %></span></div>
+            <% }};
+               						%>
+                                </div>
+                              </div>
+                              <div id="write_layout">
+                              <div id="write_layout_btn">
+                              	<button onclick="show_option()">+</button>
+                              </div>
+                                <input type="text" id="input_write" placeholder="說說話吧...">
+                              </div>
+                            </div> 
+                    </div>
+            </div>
+        </div>
+    </body>
+    <script>
+    
+var list = document.getElementById('list');
+var height = $(list).height();
+//訊息輸入框控制鍵盤Enter輸出即發話				
+$(input_write).keypress(function(e){
+	code = (e.keyCode ? e.keyCode : e.which);
+	if (code == 13){
+		//確認輸入框欄位非空白
+		if(input_write.value != ""){
+			//透過ajax傳送輸入框資料到後端
+			//$.post為JQuery提供之function
+			//$.post(Router,傳到後端的內容(用陣列),接收後端回傳內容(以function作處裡),內容格式)
+			$.post("/send",{text:input_write.value},function(response){
+				input_write.value = "";//清空輸入框欄位
+				list.innerHTML = '';
+				var str = '';
+				var message = response;
+				for(item in message){  //將data資料loop出來
+                	if(message[item].u_name=="系統"){ 
+                		str+='<div data-key=""><span class="name_style_system">'+message[item].u_name+'：'+message[item].m_content+'</span> <span class="date_time">'+message[item].time+'</span></div>'
+            		}else{
+                		str+='<div data-key=""><span class="name_style">'+message[item].u_name+'：'+message[item].m_content+'</span> <span class="date_time">'+message[item].time+'</span></div>'
+            	}
+            	};
+				list.innerHTML = str; //將訊息更新到<div id=list>內
+				$(show_message_layout).scrollTop($(list).height());//訊息內容滑至最底							
+			}, "json");	
+		}
+	} 
+}); 
+//setInterval會一直循環
+var test = setInterval( function(){
+	$.post("/repeat_call",{text:input_write.value},function(response){
+				list.innerHTML = '';
+				var str = '';
+				var message = response;
+				for(item in message){  //將data資料loop出來
+                	if(message[item].u_name=="系統"){ 
+                		str+='<div data-key=""><span class="name_style_system">'+message[item].u_name+'：'+message[item].m_content+'</span> <span class="date_time">'+message[item].time+'</span></div>'
+            		}else{
+                		str+='<div data-key=""><span class="name_style">'+message[item].u_name+'：'+message[item].m_content+'</span> <span class="date_time">'+message[item].time+'</span></div>'
+            	}
+            	};
+				list.innerHTML = str; //將訊息更新到<div id=list>內
+				//$(show_message_layout).scrollTop($(list).height());//訊息內容滑至最底							
+			}, "json");
+	} , 2000 );
+
+
+    </script>

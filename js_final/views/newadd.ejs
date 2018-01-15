@@ -1,0 +1,42 @@
+<% layout('layout') %>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <a href="index.html"><span>3姑6婆</span></a>
+        </div>
+        <div id="container">
+            <div id="banner_wrapper">
+                <div id="banner">
+                    <div id="banner_left">
+                            <div id="banner_info">
+                                <h2>未來的好姊妹</h2><br><h2>X</h2><br>
+                                <h2>未來的志同道合</h2>
+                            </div>
+                    </div>
+                    <div id="banner_right" >
+                        <h2>共同的聊天室</h2><br><h2>X</h2><br>
+                        <h2>共同的興趣</h2>
+                    </div>
+                </div>
+            </div> 
+            <div id="main">
+                <div class="form-group row" style="text-align:center;margin-left:40%;">  
+
+                    <form action="/signup" method="get" style="margin-top:20px;">
+                            <logintitle>註冊</logintitle><br>&nbsp;<br>
+                            <input type="text" class="form-control" placeholder="中文姓名" name="cname" aria-describedby="sizing-addon2" required><br>
+                            <input type="email" class="form-control" placeholder="Email" name="email" aria-describedby="sizing-addon2" required><br>
+                            <input type="text" class="form-control" placeholder="身分證號碼" name="id" aria-describedby="sizing-addon2" required><br>
+                            <input type="text" class="form-control" placeholder="會員帳號" name="account" aria-describedby="sizing-addon2" required><br>
+                            <input type="text" class="form-control" placeholder="會員密碼" name="pwd" aria-describedby="sizing-addon2" required><br>
+                            <input type="checkbox" required>同意使用條款<br><br>
+                            <input type="submit" value="註冊" class="btn btn-primary btn-lg">
+                    </form>
+                </div>         
+            </div>
+        </div>
+        <div id="footer">
+            <span>Copyright © 2017 NUKIM 3姑6婆 All rights reserved</span>
+        </div>
+    </div>   
+</body>

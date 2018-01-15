@@ -1,0 +1,41 @@
+<% layout('layout') %>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <a href="/chatroom"><span>3姑6婆</span></a>
+            <span id="username">使用者名稱</span>
+        </div>
+        <div id="chatroom_container">
+                <div id="chatroom_main">
+                        <div id="history_wrapper">
+							<div id="show_history_layout">
+								<div id="list">
+<%
+	var y, m, d;
+	for(item in history){
+		try{
+			y = history[item].a_d.getFullYear();
+			m = history[item].a_d.getMonth()+1;
+			if(m<10){m='0'+m.toString()};
+			if(d<10){d='0'+d.toString()};
+			d = history[item].a_d.getDate();
+		}catch(err){
+			y = '0000';
+			m = '00';
+			d = '00';
+		}
+%>
+		<span><%= y %>-<%= m %>-<%= d %></br>　<%= history[item].a_name %> @ <%= history[item].location %></br></br></span>
+<%	} %>
+								</div>	
+							</div>
+                        </div> 
+                </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+    

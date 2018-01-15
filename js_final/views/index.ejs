@@ -1,0 +1,52 @@
+<% layout('layout') %>
+<body>
+        <div id="wrapper">
+                <div id="header">
+                    <a href="/"><span>3姑6婆</span></a>
+                    <%
+                    if(UserID != null){%>
+                    <button id="login" ><%=UserID%></button>
+                    <%}else{%>
+                    <button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+                    <%}%>
+                </div>
+                <div id="container">
+                    <div id="banner_wrapper">
+                        <div id="banner">
+                            <div id="banner_left">
+                                <img src="http://140.127.220.149/js_final/image/talk.png" alt="">
+                                <div id="banner_info">
+                                    <h2>專門設計給婆婆媽媽們的聊天室</h2>
+                                    <h2>提供給你菜市場般的親切</h2>
+                                </div>
+                            </div>
+                            <div id="banner_right">
+                                <h2>讓未來的好姊妹一起認識你</h2>
+                                <button id="newadd" onclick="javascript:location.href='/newadd'">點我註冊</button>
+                            </div>
+                        </div>
+                    </div>    
+                    <div id="main">
+                        <div class="container" id="main_container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="http://140.127.220.149/js_final/image/p1.png" alt="">
+                                    <span>依主題創立或加入各式各樣聊天室</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="http://140.127.220.149/js_final/image/p2.png" alt="">
+                                    <span>依主題創立或加入各式各樣聊天室</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="http://140.127.220.149/js_final/image/p3.png" alt="">
+                                    <span>依主題創立或加入各式各樣聊天室</span>
+                                </div>
+                            </div> 
+                        </div>           
+                    </div>
+                </div>
+                <div id="footer">
+                    <span>Copyright © 2017 NUKIM 3姑6婆 All rights reserved</span>
+                </div>
+            </div>    
+</body>
