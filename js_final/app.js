@@ -57,8 +57,13 @@ app.get('/', function (req, res) {
 
 //前往登入
 app.get('/login',function(req,res){
+	var r = 0;
+	if(req.session.user_id != null){
+		console.log(req.session.user_id);
+		r = 1;
+	}
     console.log("login page.");
-    res.render('login',{title:'3姑6婆登入'})
+    res.render('login',{title:'3姑6婆登入', redir: r})
 });
 
 //登入
@@ -87,7 +92,7 @@ app.post('/signin', function (req, res) {
             console.log(req.session.user_id);
             console.log(req.session.user_name);
             console.log('成功登入');
-            res.redirect('http://140.127.220.149:3005/chatroom?id=5')
+            res.redirect('http://140.127.220.149:3005/room_list')
         }
         else{
             console.log('失敗登入');
@@ -101,8 +106,13 @@ app.post('/signin', function (req, res) {
 
 //前往註冊
 app.get('/newadd',function(req,res){
+	var r = 0;
+	if(req.session.user_id != null){
+		console.log(req.session.user_id);
+		r = 1;
+	}
     console.log('newcoming add info.');
-    res.render('newadd',{title: '3姑6婆註冊'})
+    res.render('newadd',{title: '3姑6婆註冊', redir: r})
 });
 
 //註冊
@@ -183,7 +193,8 @@ app.get('/chatroom', function (req, res) {
     if(id == null) res.status(404).send('抱歉，此聊天室不存在');
     // user_id = 8;
     // user_name = "宋美華";
-    room_id = 5;
+    // room_id = 5;
+    room_id = id;
     var select_roomName='SELECT c_name, c_type FROM chatroom WHERE c_id="'+room_id+'"';
     var select_getMessage=' SELECT u.u_name,m.m_content,m.time FROM user u, message m WHERE u.u_no = m.u_no AND m.c_id = "'+room_id+'" ORDER BY m.time';
     con.query(select_getMessage,function(error, result, fields){
@@ -197,7 +208,7 @@ app.get('/chatroom', function (req, res) {
 	            throw error;
 	        }else{
 	        	console.log(result2);
-	        	res.render('chatroom',{title: '3姑6婆聊天室',UserID: req.session.user_name,chatroomName: result2,message: result}) 
+	        	res.render('chatroom',{title: '3姑6婆 - 聊天室',UserID: req.session.user_name,chatroomName: result2,message: result}) 
 	        }	
         	});
         }
@@ -271,9 +282,84 @@ app.get('/history', function (req, res) {
 			console.log('資料讀取失敗！');
 			throw error;
 		}else{
-			res.render('history', {title: '3姑6婆活動紀錄', history: result});
+			res.render('history', {title: '3姑6婆 - 活動紀錄', history: result, userid: req.session.user_name});
 		}
 	});	
 });
+
+app.get('/room_list', function (req, res) {
+	console.log("User calling room list.");
+	var select_getRoom='SELECT * FROM chatroom';
+	con.query(select_getRoom, function(error, result, fields){
+		if(error){
+			console.log('資料讀取失敗！');
+			throw error;
+		}else{
+			res.render('room_list', {title: '3姑6婆 - 聊天室列表', room: result, userid: req.session.user_name});
+		}
+	});	
+});
+
+app.get('/create_room', function (req, res) {
+	console.log("User calling create_room.");
+	res.render('create_room', {title: '3姑6婆 - 創建聊天室', userid: req.session.user_name});
+});
+
+app.post('/send_create_room', function (req, res) {
+	console.log("User calling send_create_room.");
+	var type = req.body.input_type;
+	var name = req.body.input_write;
+	const insert_new_room = "INSERT INTO chatroom (c_type, c_name, u_no) VALUES ('" + type + "', '" + name + "', -1)";
+	con.query(insert_new_room, function(error, result, fields){
+		if(error){
+			console.log('資料寫入失敗！');
+			throw error;
+		}else{
+			res.redirect('/room_list');
+		}
+	});
+});
+
+app.get('/edit_image', function (req, res) {
+	console.log("User calling edit_image.");
+	res.render('edit_image', {title: '3姑6婆 - 圖片製作', userid: req.session.user_name});
+});
+
+app.get('/logout', function (req, res) {
+	console.log("User calling logout.");
+	req.session.user_id = null;
+	req.session.user_name = null;
+	res.redirect('/login');
+});
+
+app.get('/active_creat', function (req, res) {
+	console.log("User calling active_creat.");
+	res.render('active_creat', {title: '3姑6婆 - 創立活動', userid: req.session.user_name});
+});
+
+app.post('/send_active_creat', function (req, res) {
+	console.log("User calling send_active_creat");
+	var type = req.body.a_name;
+	var u_id = req.body.userid;
+    var c_id = req.body.c_id;
+    var u_id = req.body.u_id;
+    var allday= req.body.allday;
+    var s_tim = req.body.s_tim;
+    var e_time = req.body.e_time;
+    var location = req.body.location;
+    var invite_reply = req.body.invite_reply;
+    var alert = req.body.alert;
+
+	const insert_new_active = "INSERT INTO active (a_name, u_id, c_id, allday, s_time, e_time, location, invite_reply, alert) VALUES ('" + a_name + "', '" + u_id + "',  '" + c_id + "', '" + allday + "', '" + s_time + "', '" + e_time + "', '" + location + "', '" + invite_reply + "', '" + alert + "')";
+	con.query(insert_new_active, function(error, result, fields){
+		if(error){
+			console.log('資料寫入失敗！');
+			throw error;
+		}else{
+			res.redirect('/history');
+		}
+	});
+});
+
 
 app.listen(3005);

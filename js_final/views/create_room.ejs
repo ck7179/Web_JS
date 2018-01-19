@@ -1,0 +1,85 @@
+<% layout('layout') %>
+<body>
+    <div id="wrapper">
+        <div id="header">
+        <a href="/room_list"><span>3姑6婆</span></a>
+            <%
+                    if(userid != null){%>
+                    <button id="login" onclick="javascript:location.href='/logout'"><%=userid%></button>
+                    <%}else{%>
+                    	<script>location.href='/'</script>
+                    <button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+                    <%}%>
+		</div>
+        <div id="chatroom_container">
+                <div id="chatroom_main">
+                        <div id="write_message_wrapper">
+							<div id="show_message_layout">
+								<div id="list">
+									<div class="row">
+										<div class="col-md-4 room_type type_selected">
+											<img src="https://i.imgur.com/cpVF4fj.png"/>
+											<div>
+												<span>八點檔</span>
+											</div>
+										</div>
+										<div class="col-md-4 room_type">
+											<img src="https://i.imgur.com/cpVF4fj.png"/>
+											<div>
+												<span>民生</span>
+											</div>
+										</div>
+										<div class="col-md-4 room_type">
+											<img src="https://i.imgur.com/cpVF4fj.png"/>
+											<div>
+												<span>家庭</span>
+											</div>
+										</div>
+										<div class="col-md-4 room_type">
+											<img src="https://i.imgur.com/cpVF4fj.png"/>
+											<div>
+												<span>旅遊</span>
+											</div>
+										</div>
+										<div class="col-md-4 room_type">
+											<img src="https://i.imgur.com/cpVF4fj.png"/>
+											<div>
+												<span>卡通</span>
+											</div>
+										</div>
+										<div class="col-md-4 room_type">
+											<img src="https://i.imgur.com/cpVF4fj.png"/>
+											<div>
+												<span>流行</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<form method="post" action="/send_create_room">
+								<div id="write_layout">
+									<input type="text" name="input_type" class="input_type" value="分類1" hidden/>
+									<input type="text" name="input_write" id="input_write" class="input_write" placeholder="請輸入聊天室名稱...">
+									<input type="submit" hidden/>
+								</div>
+							</form>
+                        </div> 
+                </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+
+<script>
+	var room_type;
+	$('.room_type').on('click', function() {
+		$('.room_type').removeClass('type_selected');
+		$(this).addClass('type_selected');
+		$('.input_type').val($('.type_selected > div > span').text());
+	});
+</script>
+
+    

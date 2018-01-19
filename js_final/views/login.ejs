@@ -1,9 +1,15 @@
-
 <% layout('layout') %>
 <body>
     <div id="wrapper">
         <div id="header">
-            <a href="index.html"><span>3姑6婆</span></a>
+            <a href="/"><span>3姑6婆</span></a>
+            <%
+                if(redir==1){
+            %>
+                    <script>location.href='/room_list'</script>
+            <%
+            	}
+            %>
         </div>
         <div id="container">
             <div id="banner_wrapper">

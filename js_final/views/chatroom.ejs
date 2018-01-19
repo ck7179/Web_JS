@@ -2,12 +2,13 @@
 <body>
         <div id="wrapper">
             <div id="header">
-                <a href="/"><span>3姑6婆</span></a>
+                <a href="/room_list"><span>3姑6婆</span></a>
                 <%
                     if(UserID != null){%>
-                    <button id="login" ><%=UserID%></button>
+                    <button id="login" onclick="javascript:location.href='/logout'"><%=UserID%></button>
                     <%}else{%>
-                    <button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+                    	<script>location.href='/'</script>
+                    	<button onclick="javascript:location.href='/login'"  id="login" >登入</button>
                     <%}%>
             </div>
             <div id="chatroom_container">
@@ -18,13 +19,13 @@
                             			<a href="#"><img src="http://140.127.220.149/js_final/image/activity.png" alt="建立活動"></a>
                             		</div>
                             		<div id="write_option_2" class="write_option_sub">
-                            			<a href="http://140.127.220.149/js_final/history.php"><img src="http://140.127.220.149/js_final/image/history.png" alt="活動紀錄"></a>
+                            			<a href="http://140.127.220.149:3005/history"><img src="http://140.127.220.149/js_final/image/history.png" alt="活動紀錄"></a>
                             		</div>
                             		<div id="write_option_3" class="write_option_sub">
                             			<a href="#"><img src="http://140.127.220.149/js_final/image/calendar.png" alt="行事曆"></a>
                             		</div>
                             		<div id="write_option_4" class="write_option_sub">
-                            			<a href="http://140.127.220.149/js_final/edit_image.php"><img src="http://140.127.220.149/js_final/image/picture.png" alt="特效圖"></a>
+                            			<a href="http://140.127.220.149:3005/edit_image"><img src="http://140.127.220.149/js_final/image/picture.png" alt="特效圖"></a>
                             		</div>
                             	</div>
 	                            <div id="chatroom_roomName">

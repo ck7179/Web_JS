@@ -1,0 +1,86 @@
+<% layout('layout') %>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <a href="/"><span>3姑6婆</span></a>
+            <%
+            if(userid != null){%>
+            <button id="login" onclick="javascript:location.href='/logout'"><%=userid%></button>
+            <%}else{%>
+              <script>location.href='/'</script>
+            <button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+            <%}%>
+        </div>
+        <div id="active_container"></div>
+        <div id="active_titile_squard"><div id="active_title_word">建立活動</div></div>
+        <div id="active_main">
+            <div id="active_content_word">
+                    <form  method="Post" action="/send_active_creat"><br>
+                        <div class="form-group row">
+                                <label for="a_name" class="col-sm-2 col-form-label">活動名稱</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="a_name" placeholder="輸入活動名稱">
+                                </div>
+                              </div>
+                        <div id="active_line"></div><br>
+                       <fieldset class="form-group">
+                                        <div class="row">
+                                          <legend class="col-form-legend col-sm-2">整天</legend>
+                                          <div class="col-sm-10">
+                                            <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="allday" id="gridRadios1" value="0" checked>是</label>
+                                            </div>
+                                            <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="allday" id="gridRadios2" value="1">否</label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </fieldset>                      
+                   <fieldset class="form-group">
+                                  &nbsp&nbsp&nbsp&nbsp 開始&nbsp&nbsp&nbsp&nbsp<input type="date" name="s_time"><br><br><br>
+                                  &nbsp&nbsp&nbsp&nbsp 結束&nbsp&nbsp&nbsp&nbsp<input type="date" name="e_time"><br><br>
+                                  <div class="form-group row">
+                                <label for="active_name" class="col-sm-2 col-form-label">地點</label>
+                                <div class="col-sm-8">
+                               
+                                  <input type="text" class="form-control" id="active_name" placeholder="輸入地點">
+                                </div>
+                                &nbsp&nbsp<a href="#" onclick="window.open('/googleplace.html', '建議地點', config='height=500,width=800');">建議地點</a>
+                              </div>
+                                <fieldset class="form-group">
+                                        <div class="row">
+                                          <legend class="col-form-legend col-sm-2">受邀人回覆是否參加</legend>
+                                          <div class="col-sm-10">
+                                            <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="invite_reply" id="gridRadios1" value="0" >是</label>
+                                            </div>
+                                            <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="invite_reply" id="gridRadios2" value="1">否</label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </fieldset>                      
+                             <fieldset class="form-group">
+                                        <div class="row">
+                                          <legend class="col-form-legend col-sm-2">設定提醒</legend>
+                                          <div class="col-sm-10">
+                                            <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="alter" id="gridRadios1" value="0" checked>是</label>
+                                            </div>
+                                            <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="alter" id="gridRadios2" value="1">否</label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </fieldset>                      
+                            <div id="active_content_summit"><input type="submit" value="確定送出"><br></div> 
+                    </form>
+            </div>
+        </div>
+</body>

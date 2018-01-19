@@ -2,8 +2,13 @@
 <body>
     <div id="wrapper">
         <div id="header">
-            <a href="/chatroom"><span>3姑6婆</span></a>
-            <span id="username">使用者名稱</span>
+            <a href="/room_list"><span>3姑6婆</span></a>
+            <% if(userid != null){ %>
+                	<button id="login" onclick="javascript:location.href='/logout'"><%= userid %></button>
+                <%}else{%>
+                	<script>location.href='/'</script>
+                	<button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+            <%}%>
         </div>
         <div id="chatroom_container">
                 <div id="chatroom_main">

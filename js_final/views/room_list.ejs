@@ -1,0 +1,55 @@
+<% layout('layout') %>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <a href="/room_list"><span>3姑6婆</span></a>
+            <% if(userid != null){ %>
+                	<button id="login" onclick="javascript:location.href='/logout'"><%= userid %></button>
+                <%}else{%>
+                	<script>location.href='/'</script>
+                	<button onclick="javascript:location.href='/login'"  id="login" >登入</button>
+            <%}%>
+		</div>
+        <div id="chatroom_container">
+                <div id="chatroom_main">
+                        <div id="write_message_wrapper">
+							<div id="show_message_layout" style="height: auto; bottom: 30px;">
+								<div id="list">
+									<div class="row">
+									<% for(item in room){ %>
+										<div class="col-md-4 room_type">
+											<a href="/chatroom?id=<%= room[item].c_id %>"><img src="https://i.imgur.com/cpVF4fj.png" style="max-width: 80%; max-height: 80%; margin-top: 10%; margin-left: 10%"/></a>
+											<div>
+												<span>[<%= room[item].c_type %>] <%= room[item].c_name %></span>
+											</div>
+										</div>
+									<% } %>
+									</div>
+								</div>
+							</div>
+                        </div> 
+                        
+                        <form method="post" action="send_edit_image.php">
+							<div id="write_layout">
+									<center><input type="button" value="自行創建聊天室" onclick="javascript:location.href='/create_room'"/></center>
+							</div>
+						</form>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+
+<script>
+	var room_type;
+	$('.room_type').on('click', function() {
+		$('.room_type').removeClass('type_selected');
+		$(this).addClass('type_selected');
+		$('.input_type').val($('.type_selected > div > span').text());
+	});
+</script>
+
+    

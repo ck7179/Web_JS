@@ -2,10 +2,11 @@
 <body>
         <div id="wrapper">
                 <div id="header">
-                    <a href="/"><span>3姑6婆</span></a>
+                    <a href="/room_list"><span>3姑6婆</span></a>
                     <%
                     if(UserID != null){%>
                     <button id="login" ><%=UserID%></button>
+                    	<script>location.href='/room_list'</script>
                     <%}else{%>
                     <button onclick="javascript:location.href='/login'"  id="login" >登入</button>
                     <%}%>
